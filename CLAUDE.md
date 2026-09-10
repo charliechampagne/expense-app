@@ -51,6 +51,20 @@ Relationships: `cp_expenseline_expenseheader` (1:N header→lines, cascade), `cp
 
 `scripts/seed_sample_data.py` (idempotent) seeds 8 `contact` records (`*.example.com`), 7 expense headers (`EXP-1000`–`EXP-1006`, one per status incl. Closed), 19 expense lines (`EXP-LINE-1000`+), each line with a placeholder `.txt` receipt in `cp_receipt`. Header totals are set to the sum of their lines.
 
+## Generative pages (`/model-apps:genpage`)
+
+Model-driven app **Expense App** (`3256b9b6-5dad-f111-aaac-7c1e5240a967`), in solution `ExpenseApp`, holds two generative pages. Source + plan + build log in `my-expenses-dashboard/`.
+
+| Page | File | page-id |
+|---|---|---|
+| My Expenses Dashboard | `my-expenses-dashboard/my-expenses-dashboard.tsx` | `9d22cb9b-32da-4af9-a6c7-41432ca89843` |
+| Expense Detail | `my-expenses-dashboard/expense-detail.tsx` | `3087885f-ddd8-43f3-b89e-e3cddfce72e2` |
+
+- Redeploy: `pac model genpage upload --app-id <app> --page-id <page> --code-file <tsx> --data-sources "..." --prompt "<delta>" --model claude-sonnet-5`
+- Cross-page nav uses the real page-ids inline (not `PAGEREF_` tokens — those are resolved post-deploy).
+- Gotcha: `cp_expenseline._cp_expenseheaderid_value` reads back as `/cp_expenseheader(<guid>)` in genux — normalise with `guidOf()` before keying maps.
+- Not yet packaged into the exported solution under `solutions/` — run `pac solution export` + Phase 6.7 packaging to capture the app + pages for cross-env deploy.
+
 ## Conventions
 
 - Environment-first: create metadata in the environment via API/SDK, then `pac solution export` + `unpack` into `./solutions/`. The repo is the source of truth.

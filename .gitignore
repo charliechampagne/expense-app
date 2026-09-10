@@ -9,3 +9,6 @@ __pycache__/
 solutions/*.zip
 plugins/**/bin/
 plugins/**/obj/
+.playwright-mcp/
+*.png
+**/node_modules/
