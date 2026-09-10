@@ -1,0 +1,6 @@
+{
+  "enabledMcpjsonServers": [
+    "dataverse-legoland"
+  ],
+  "enableAllProjectMcpServers": true
+}

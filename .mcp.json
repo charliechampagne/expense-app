@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "dataverse-legoland": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx -y @microsoft/dataverse@latest mcp https://legoland.crm3.dynamics.com"
+      ],
+      "env": {
+        "DATAVERSE_OPERATION_CONTEXT": "app=dataverse-skills/1.12.1;skill=mcp-direct;agent=claude-code"
+      }
+    }
+  }
+}
