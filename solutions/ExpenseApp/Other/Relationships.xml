@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EntityRelationships xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <EntityRelationship Name="business_unit_cp_expenseheader" />
+  <EntityRelationship Name="business_unit_cp_expenseline" />
+  <EntityRelationship Name="cp_expenseheader_contact" />
+  <EntityRelationship Name="cp_expenseline_expenseheader" />
+  <EntityRelationship Name="FileAttachment_cp_ExpenseLine_cp_Receipt" />
+  <EntityRelationship Name="lk_cp_expenseheader_createdby" />
+  <EntityRelationship Name="lk_cp_expenseheader_modifiedby" />
+  <EntityRelationship Name="lk_cp_expenseline_createdby" />
+  <EntityRelationship Name="lk_cp_expenseline_modifiedby" />
+  <EntityRelationship Name="owner_cp_expenseheader" />
+  <EntityRelationship Name="owner_cp_expenseline" />
+  <EntityRelationship Name="team_cp_expenseheader" />
+  <EntityRelationship Name="team_cp_expenseline" />
+  <EntityRelationship Name="TransactionCurrency_cp_ExpenseHeader" />
+  <EntityRelationship Name="TransactionCurrency_cp_ExpenseLine" />
+  <EntityRelationship Name="user_cp_expenseheader" />
+  <EntityRelationship Name="user_cp_expenseline" />
+</EntityRelationships>

@@ -20,6 +20,33 @@
 - PAC CLI (`dv-solution`, `dv-admin`): `pac auth select --name legoland`.
 - Python: `python scripts/auth.py --check` makes a real data-plane call.
 
+## Data model (solution `ExpenseApp`)
+
+Built by `scripts/build_expense_model.py` (idempotent; `--reset` drops the two tables first).
+
+### `cp_expenseheader` — Expense Header
+| Column | Logical name | Type | Notes |
+|---|---|---|---|
+| Expense Number | `cp_name` | Text (primary) | Autonumber `EXP-{SEQNUM:00000}` |
+| Date | `cp_date` | Date only | |
+| Description | `cp_description` | Multiline text (2000) | |
+| Total Amount | `cp_totalamount` | Currency | Manual (not a rollup) |
+| Contact | `cp_contactid` | Lookup → `contact` | Delete: remove link |
+
+**Status Reason (`statuscode`)**: Open (1, Active) · Submitted (121570000) · Approved (121570001) · Paid (121570002) · Closed (2, Inactive)
+
+### `cp_expenseline` — Expense Line
+| Column | Logical name | Type | Notes |
+|---|---|---|---|
+| Line Number | `cp_name` | Text (primary) | Autonumber `EXP-LINE-{SEQNUM:00000}` |
+| Date | `cp_date` | Date only | |
+| Amount | `cp_amount` | Currency | |
+| Description | `cp_description` | Multiline text (2000) | |
+| Receipt | `cp_receipt` | File (32 MB) | |
+| Expense Header | `cp_expenseheaderid` | Lookup → `cp_expenseheader` | Required; delete: **cascade** (parental) |
+
+Relationships: `cp_expenseline_expenseheader` (1:N header→lines, cascade), `cp_expenseheader_contact` (N:1 header→contact).
+
 ## Conventions
 
 - Environment-first: create metadata in the environment via API/SDK, then `pac solution export` + `unpack` into `./solutions/`. The repo is the source of truth.
