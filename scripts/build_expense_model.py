@@ -219,13 +219,13 @@ if RESET:
 
 print("\n== Phase 1: tables ==")
 create_entity(entity("cp_ExpenseHeader", "Expense Headers", "cp_name", [
-    string_primary("cp_Name", "EXP-{SEQNUM:00000}", "Expense Number"),
+    string_primary("cp_Name", "EXP-{SEQNUM:5}", "Expense Number"),
     date_only("cp_Date", "Date"),
     memo("cp_Description", "Description"),
     money("cp_TotalAmount", "Total Amount"),
 ]), "cp_expenseheader")
 create_entity(entity("cp_ExpenseLine", "Expense Lines", "cp_name", [
-    string_primary("cp_Name", "EXP-LINE-{SEQNUM:00000}", "Line Number"),
+    string_primary("cp_Name", "EXP-LINE-{SEQNUM:5}", "Line Number"),
     date_only("cp_Date", "Date"),
     money("cp_Amount", "Amount"),
     memo("cp_Description", "Description"),

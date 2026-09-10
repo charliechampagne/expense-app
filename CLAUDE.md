@@ -27,7 +27,7 @@ Built by `scripts/build_expense_model.py` (idempotent; `--reset` drops the two t
 ### `cp_expenseheader` — Expense Header
 | Column | Logical name | Type | Notes |
 |---|---|---|---|
-| Expense Number | `cp_name` | Text (primary) | Autonumber `EXP-{SEQNUM:00000}` |
+| Expense Number | `cp_name` | Text (primary) | Autonumber `EXP-{SEQNUM:5}` |
 | Date | `cp_date` | Date only | |
 | Description | `cp_description` | Multiline text (2000) | |
 | Total Amount | `cp_totalamount` | Currency | Manual (not a rollup) |
@@ -38,7 +38,7 @@ Built by `scripts/build_expense_model.py` (idempotent; `--reset` drops the two t
 ### `cp_expenseline` — Expense Line
 | Column | Logical name | Type | Notes |
 |---|---|---|---|
-| Line Number | `cp_name` | Text (primary) | Autonumber `EXP-LINE-{SEQNUM:00000}` |
+| Line Number | `cp_name` | Text (primary) | Autonumber `EXP-LINE-{SEQNUM:5}` |
 | Date | `cp_date` | Date only | |
 | Amount | `cp_amount` | Currency | |
 | Description | `cp_description` | Multiline text (2000) | |
@@ -46,6 +46,10 @@ Built by `scripts/build_expense_model.py` (idempotent; `--reset` drops the two t
 | Expense Header | `cp_expenseheaderid` | Lookup → `cp_expenseheader` | Required; delete: **cascade** (parental) |
 
 Relationships: `cp_expenseline_expenseheader` (1:N header→lines, cascade), `cp_expenseheader_contact` (N:1 header→contact).
+
+### Sample data
+
+`scripts/seed_sample_data.py` (idempotent) seeds 8 `contact` records (`*.example.com`), 7 expense headers (`EXP-1000`–`EXP-1006`, one per status incl. Closed), 19 expense lines (`EXP-LINE-1000`+), each line with a placeholder `.txt` receipt in `cp_receipt`. Header totals are set to the sum of their lines.
 
 ## Conventions
 
